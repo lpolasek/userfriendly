@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0">
+<channel>
+<title>User Friendly the Comic Strip. by Illiad</title>
+<link>http://www.userfriendly.org/</link>
+<description>User Friendly the Comic Strip. by Illiad -scraped by xiffy-</description>
+<language>en-us</language>
+<image>
+	<url>http://rss.xiffy.nl/img/uf-rss.gif</url>
+	<title>User Friendly the Comic Strip. by Illiad</title>
+	<link>http://www.userfriendly.org/</link>
+</image>
+
+{% for item in items %}
+<item>
+	<title>{{ item.title }}</title>
+	<link>{{ item.link }}</link>
+	<description>&lt;img src="{{ item.image }}" title="{{ item.title }}" alt="{{ item.title }}" /&gt;</description>
+	<pubDate>{{ item.date.strftime('%a, %d %b %Y %H:%M:%S GMT') }}</pubDate>
+	<guid>{{ item.link }}</guid>
+</item>
+{% endfor %}
+</channel>
+</rss>
