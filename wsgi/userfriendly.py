@@ -3,8 +3,6 @@ from flask import Flask, render_template, make_response
 import lxml.html
 import os
 
-app = Flask(__name__)
-
 LIST_SIZE = 14
 
 class SkipException (Exception):
@@ -33,7 +31,6 @@ def get_item(d):
 
 	return item
 
-@app.route('/rss.xml')
 def userfriendly():
 
 	start_date = date.today()-timedelta(days=LIST_SIZE-1)
@@ -51,7 +48,11 @@ def userfriendly():
 	response.headers['Cache-Control'] = 'public, must-revalidate, max-age=0'
 	return response
 
+def configure(app):
+	app.config['PROPAGATE_EXCEPTIONS'] = True
+	app.add_url_rule('/rss.xml', 'userfriendly', userfriendly)
+
 if __name__ == '__main__':
 	#app.debug = True
-	app.config['PROPAGATE_EXCEPTIONS'] = True
+	configure(app)
 	app.run(host='0.0.0.0')
